@@ -1,28 +1,45 @@
-import React, { useCallback, useRef } from "react";
-import { Form } from "@unform/web";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { FormHandles } from "@unform/core";
-import { Container, FormContainer, JokeContainer } from "./styles";
+import api from "../../services/api";
+import { Container, JokeContainer } from "./styles";
 import NameField from "./NameField";
-import Input from "../../components/Input";
-import Button from "../../components/Button";
 
 const Dashboard: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const handleSubmit = useCallback(() => {}, []);
+
+  const [joke, setJoke] = useState("");
+
+  useEffect(() => {
+    async function fecthJoke() {
+      const firstName = localStorage.getItem("first");
+      const lastName = localStorage.getItem("last");
+
+      if (firstName && lastName) {
+        const response = await api.post(
+          `jokes/random?firstName=${firstName}&lastName=${lastName}`
+        );
+        setJoke(response.data.value.joke);
+      } else {
+        const response = await api.post("jokes/random");
+        setJoke(response.data.value.joke);
+      }
+    }
+    fecthJoke();
+  }, []);
+
+  const handleSubmit = useCallback(async (data) => {
+    const response = await api.post("jokes/random");
+    setJoke(response.data.value.joke);
+  }, []);
+
   return (
     <Container>
       <div>
-        <FormContainer>
-          <Form onSubmit={handleSubmit} ref={formRef}>
-            <h4>Search Jokes</h4>
-            <Input placeholder="Search" name="search" type="text" />
-            <Button>Search</Button>
-          </Form>
-        </FormContainer>
         <NameField />
       </div>
       <JokeContainer>
-        <h1>Here is The Joke</h1>
+        <h2>Here is The Joke</h2>
+        {joke && <span>{joke}</span>}
       </JokeContainer>
     </Container>
   );
