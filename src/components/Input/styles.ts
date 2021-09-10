@@ -10,4 +10,5 @@ export const InputField = styled.input`
   border: 2px solid #232129;
   padding: 16px;
   width: 100%;
+  color: #f4ede8;
 `;

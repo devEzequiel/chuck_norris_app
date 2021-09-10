@@ -24,7 +24,6 @@ const Input: React.FC<InputProps> = ({ name, label, ...rest }) => {
     <InputContainer>
       {label && <Label>{label}</Label>}
       <InputField ref={inputRef} name={name} {...rest} autoComplete="on" />
-      {error && <span className="input-error">{error}</span>}
     </InputContainer>
   );
 };

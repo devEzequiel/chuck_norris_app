@@ -11,7 +11,7 @@ const Button: React.FC<ButtonProps> = ({
   ...rest
 }) => {
   return (
-    <ButtonContent type="button" {...rest} {...(isLoading && "disabled")}>
+    <ButtonContent type="submit" {...rest} {...(isLoading && "disabled")}>
       {!isLoading ? children : "Loading..."}
     </ButtonContent>
   );

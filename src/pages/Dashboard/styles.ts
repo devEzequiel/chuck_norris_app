@@ -12,8 +12,13 @@ export const Container = styled.div`
 export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
+  margin-bottom: 80px;
 
   h4 {
     margin-bottom: 24px;
   }
+`;
+
+export const JokeContainer = styled.div`
+  margin-left: 80px;
 `;
