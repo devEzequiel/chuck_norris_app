@@ -5,7 +5,6 @@ import { FormHandles } from "@unform/core";
 import { NameContainer } from "./styles";
 import Input from "../../../components/Input";
 import Button from "../../../components/Button";
-import getValidationErrors from "../../../utils/getValidationErrors";
 
 interface NameFieldFormData {
   firstName: "string";
